@@ -30,6 +30,11 @@
 		"silex/web-profiler" : "1.0.*",
 		"phpunit/phpunit" : "4.2.*"
 	},
+	"autoload" : {
+		"psr-0" : {
+			"CodeGeneratorWeb" : "src/"
+		}
+	},
 	"support" : {
 		"source" : "https://github.com/fezfez/codeGeneratorWeb",
 		"email" : "demonchaux.stephane@gmail.com",

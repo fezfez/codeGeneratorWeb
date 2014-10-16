@@ -37,7 +37,7 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'junit'],
 
     preprocessors: {
         // source files, that you wanna generate coverage for
@@ -48,6 +48,10 @@ module.exports = function(config) {
     coverageReporter: {
         type : 'html',
         dir  : 'coverage-javascript/'
+    },
+    junitReporter: {
+        outputFile: 'test-results.xml',
+        suite: ''
     },
     // enable / disable colors in the output (reporters and logs)
     colors: true,
