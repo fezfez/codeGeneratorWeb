@@ -1,0 +1,40 @@
+{
+	"name" : "fezfez/code-generator-web",
+	"description" : "Code Generator web",
+	"type" : "library",
+	"authors" : [{
+			"name" : "Stéphane Demonchaux",
+			"email" : "demonchaux.stephane@gmail.com"
+		}
+	],
+	"keywords" : [
+		"crud",
+		"zf2",
+		"doctrine2",
+		"pdo",
+		"code generator",
+		"form generator",
+		"SOLID principles"
+	],
+	"homepage" : "https://github.com/fezfez/codeGeneratorWeb",
+	"license" : "MIT",
+	"require" : {
+		"php" : ">=5.4",
+		"silex/silex" : "1.2.*",
+		"twig/twig" : "1.16.*",
+		"symfony/twig-bridge" : "2.5.*",
+		"igorw/event-source" : "*",
+		"fezfez/code-generator" : "dev-master"
+	},
+	"require-dev" : {
+		"silex/web-profiler" : "1.0.*",
+		"phpunit/phpunit" : "4.2.*"
+	},
+	"support" : {
+		"source" : "https://github.com/fezfez/codeGeneratorWeb",
+		"email" : "demonchaux.stephane@gmail.com",
+		"issues" : "https://github.com/fezfez/codeGeneratorWeb/issues",
+		"wiki" : "https://github.com/fezfez/codeGeneratorWeb/blob/master/README.md"
+	},
+	"minimum-stability" : "dev"
+}

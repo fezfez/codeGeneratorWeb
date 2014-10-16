@@ -1,0 +1,34 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - hhvm
+
+before_script:
+  - composer self-update
+  - composer install --dev
+  - psql -c 'DROP DATABASE IF EXISTS code_generator;' -U postgres
+  - psql -c 'create database code_generator; ' -U postgres
+  - psql -U postgres -d code_generator -a -f ./tests/pg-table.sql
+  - mysql -e 'DROP DATABASE IF EXISTS code_generator'
+  - mysql -e 'create database code_generator;'
+  - mysql code_generator < ./tests/mysql-table.sql
+
+script: 
+  - mkdir -p build
+  - mkdir -p build/logs
+  - ./vendor/bin/phpunit --coverage-clover coverage.clover
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+
+matrix:
+  allow_failures:
+    - php: hhvm
+
+notifications:
+  email:
+    - demonchaux.stephane@gmail.com
