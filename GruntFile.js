@@ -5,11 +5,11 @@ module.exports = function (grunt) {
         requirejs: {
             js: {
                 options: {
-                    optimize : 'uglify2',
-                    preserveLicenseComments : false,
-                    inlineText : true,
-                    findNestedDependencies : true,
-                    name : 'App/Bootstrap',
+                    optimize: 'uglify2',
+                    preserveLicenseComments: false,
+                    inlineText: true,
+                    findNestedDependencies: true,
+                    name: 'App/Bootstrap',
                     baseUrl: 'web/assets/js',
                     mainConfigFile: 'web/assets/js/App/Bootstrap.js',
                     out: 'web/assets/build/script.js',
@@ -18,47 +18,64 @@ module.exports = function (grunt) {
             },
             css: {
                 options: {
-                  optimizeCss: 'uglify',
-                  cssIn: 'web/assets/css/main.css',
-                  out: 'web/assets/build/style.css'
+                    optimizeCss: 'uglify',
+                    cssIn: 'web/assets/css/main.css',
+                    out: 'web/assets/build/style.css'
                 }
-              }
+            }
         },
         copy: {
-          main: {
-            files: [
-              {
-                  cwd: 'web/assets/js/Vendor/pace/', 
-                  src: 'pace.min.js',
-                  dest: 'web/assets/build/',
-                  expand: true
-              }
-            ]
-          }
+            main: {
+                files: [
+                    {
+                        cwd: 'web/assets/js/Vendor/pace/',
+                        src: 'pace.min.js',
+                        dest: 'web/assets/build/',
+                        expand: true
+                    }
+                ]
+            }
         },
         uglify: {
             options: {
-                  compress: {
+                compress: {
                     global_defs: {
-                      'DEBUG': false
+                        'DEBUG': false
                     },
                     dead_code: true
-                  }
-                },
+                }
+            },
             my_target: {
-              files: {
-                'web/assets/build/require.min.js': ['web/assets/js/Vendor/requirejs/require.js']
-              }
+                files: {
+                    'web/assets/build/require.min.js': [
+                        'web/assets/js/Vendor/requirejs/require.js'
+                    ]
+                }
             }
-          }
+        },
+        karma: {
+            unit: {
+                configFile: 'karma.config.js'
+            }
+        },
+        bower: {
+            install: {
+                options: {
+                    "targetDir": "web/assets/js/Vendor"
+                }
+            }
+        }
     };
 
+    grunt.task.registerTask('test:unit', ['bower', 'karma']);
     grunt.task.registerTask('build', ['requirejs', 'copy', 'uglify']);
 
     grunt.initConfig(gruntConfig);
 
+    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-bower-task');
 
 };
