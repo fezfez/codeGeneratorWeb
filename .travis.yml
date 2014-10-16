@@ -8,7 +8,7 @@ before_script:
   - bower install
 
 script: 
-  - node_modules/karama/bin/karma start karma.config.js --single-run
+  - node_modules/karma/bin/karma start karma.config.js --single-run
 
 notifications:
   email:
