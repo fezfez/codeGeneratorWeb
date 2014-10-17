@@ -10,6 +10,7 @@ requirejs.config({
         App : 'App/',
         Controllers : 'App/Controllers',
         Corp : 'App/Corp/',
+        Services : 'App/Services',
         JQuery: 'Vendor/jquery/dist/jquery',
         TwitterBootstrap: 'Vendor/bootstrap/js/modal',
         TwitterBootstrapTooltip: 'Vendor/bootstrap/js/tooltip',

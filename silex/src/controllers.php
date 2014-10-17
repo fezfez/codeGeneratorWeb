@@ -1,7 +1,7 @@
 <?php
 
 use CrudGenerator\Backbone\MainBackboneFactory;
-use CrudGenerator\Context\WebContext;
+use CodeGeneratorWeb\Context\WebContext;
 use CrudGenerator\Generators\ResponseExpectedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

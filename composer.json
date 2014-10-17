@@ -41,5 +41,6 @@
 		"issues" : "https://github.com/fezfez/codeGeneratorWeb/issues",
 		"wiki" : "https://github.com/fezfez/codeGeneratorWeb/blob/master/README.md"
 	},
-	"minimum-stability" : "dev"
+	"minimum-stability" : "dev",
+	"prefer-stable": true
 }

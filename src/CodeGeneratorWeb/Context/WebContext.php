@@ -19,12 +19,15 @@
 namespace CodeGeneratorWeb\Context;
 
 use Symfony\Component\HttpFoundation\Request;
+use CrudGenerator\Context\ContextInterface;
+use CrudGenerator\Context\QuestionWithPredefinedResponse;
 use CrudGenerator\Generators\GeneratorDataObject;
 use CrudGenerator\Generators\ResponseExpectedException;
 use CrudGenerator\Generators\Questions\Web\GeneratorQuestion;
 use CrudGenerator\Generators\Questions\Web\MetaDataQuestion;
 use CrudGenerator\Generators\Questions\Web\MetaDataSourcesConfiguredQuestion;
 use Igorw\EventSource\Stream;
+use CrudGenerator\Generators\Parser\Lexical\QuestionResponseTypeEnum;
 
 class WebContext implements ContextInterface, \JsonSerializable
 {
@@ -91,21 +94,26 @@ class WebContext implements ContextInterface, \JsonSerializable
     /* (non-PHPdoc)
      * @see \CrudGenerator\Context\ContextInterface::ask()
     */
-    public function ask($text, $key, $defaultResponse = null, $required = false, $helpMessage = null, $type = null)
-    {
+    public function ask(
+        $text,
+        $key,
+        $defaultResponse = null,
+        $required = false,
+        $helpMessage = null,
+        QuestionResponseTypeEnum $type
+    ) {
         if (false === isset($this->question['question'])) {
             $this->question['question'] = array();
         }
-        if ($type === null) {
-            $type = 'text';
-        }
+
+        $response = $this->getResponse($key);
 
         $this->question['question'][] = array(
             'text'            => $text,
             'dtoAttribute'    => $key,
-            'defaultResponse' => $defaultResponse,
+            'defaultResponse' => ($response !== null) ? $response : $defaultResponse,
             'required'        => $required,
-            'type'            => $type
+            'type'            => $type->__toString()
         );
 
         $response = $this->getResponse($key);
@@ -120,8 +128,8 @@ class WebContext implements ContextInterface, \JsonSerializable
     {
         $response = $this->getResponse(
             $questionWithPredefinedReponse->getUniqueKey(),
-            $questionWithPredefinedReponse->isConsumeResponse(
-        ));
+            $questionWithPredefinedReponse->isConsumeResponse()
+        );
 
         $collection = array();
         foreach ($questionWithPredefinedReponse->getPredefinedResponseCollection() as $predifinedResponse) {
@@ -135,7 +143,7 @@ class WebContext implements ContextInterface, \JsonSerializable
             );
         }
 
-        $this->question['question'][] = array(
+        $this->question['question'][$questionWithPredefinedReponse->getUniqueKey()] = array(
             'text'            => $questionWithPredefinedReponse->getText(),
             'dtoAttribute'    => $questionWithPredefinedReponse->getUniqueKey(),
             'defaultResponse' => ($response !== null)

@@ -73,16 +73,7 @@
                                    type="checkbox"
                                    name="{{ question.dtoAttribute }}"
                                    ng-init="answers[question.dtoAttribute] = (question.value !== undefined) ? question.value : question.defaultResponse" />
-                            <input type="file"
-                                   ng-if="question.type == 'directory'"
-                                    id="{{ question.dtoAttribute }}"
-                                    class="form-control question"
-                                    ng-model="answers[question.dtoAttribute]"
-                                    onchange="angular.element(this).scope().setQuestion(this)"
-                                    ng-options="value.label for value in question.values track by value.id"
-                                    name="{{ question.dtoAttribute }}"
-                                    directory webkitdirectory mozdirectory />
-                            <select ng-if="question.type == 'select'"
+                            <select ng-if="question.type == 'select' || question.type == 'directory'"
                                     id="{{ question.dtoAttribute }}"
                                     class="form-control question"
                                     ng-model="answers[question.dtoAttribute]"

@@ -2,8 +2,8 @@
 <h1>Oops !</h1>
 <h2>{{ code }} internal server error</h2>
 <p>
-	{{ error.getMessage() }}<br/>
-	in {{ error.getFile() }} on line {{ error.getLine() }}
+	<b>{{ error.getMessage() }}</b><br/>
+	in <b>{{ error.getFile() }}</b> on line <b>{{ error.getLine() }}</b>
 </p>
 <p class="text-left">
 {{ error.getTraceAsString()|nl2br }}

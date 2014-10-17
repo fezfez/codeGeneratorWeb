@@ -15,7 +15,6 @@ define(function(require) {
             if (question.dtoAttribute === dtoAttribute) {
                 foundedElement = question;
                 delete data.question[index];
-                data.question = data.question.filter(function(n){ return n !== undefined; });
             }
         });
 
